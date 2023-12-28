@@ -10,23 +10,23 @@ class LocationPermissions {
     if (_instance == null) {
       const MethodChannel methodChannel =
           MethodChannel('com.baseflow.flutter/location_permissions');
-      final EventChannel eventChannel = Platform.isAndroid
+      final eventChannel = Platform.isAndroid
           ? const EventChannel(
               'com.baseflow.flutter/location_permissions_events')
           : null;
 
       _instance = LocationPermissions.private(methodChannel, eventChannel);
     }
-    return _instance;
+    return _instance!;
   }
 
   @visibleForTesting
   LocationPermissions.private(this._methodChannel, this._eventChannel);
 
-  static LocationPermissions _instance;
+  static LocationPermissions? _instance;
 
   final MethodChannel _methodChannel;
-  final EventChannel _eventChannel;
+  final EventChannel? _eventChannel;
 
   /// Check current permission status.
   ///
@@ -97,7 +97,7 @@ class LocationPermissions {
     assert(Platform.isAndroid,
         'Listening to service state changes is only supported on Android.');
 
-    return _eventChannel.receiveBroadcastStream().map((dynamic status) =>
+    return _eventChannel!.receiveBroadcastStream().map((dynamic status) =>
         status ? ServiceStatus.enabled : ServiceStatus.disabled);
   }
 }
