@@ -31,7 +31,6 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -108,16 +107,6 @@ public class LocationPermissionsPlugin implements MethodCallHandler, StreamHandl
         new EventChannel(messenger, "com.baseflow.flutter/location_permissions_events");
     channel.setMethodCallHandler(plugin);
     eventChannel.setStreamHandler(plugin);
-  }
-
-  /** Plugin registration. */
-  public static void registerWith(final Registrar registrar) {
-    final LocationPermissionsPlugin plugin = new LocationPermissionsPlugin();
-    register(plugin, registrar.messenger());
-    plugin.applicationContext = registrar.context();
-    plugin.activity = registrar.activity();
-
-    registrar.addRequestPermissionsResultListener(createAddRequestPermissionsResultListener(plugin));
   }
 
   private void emitLocationServiceStatus(boolean enabled) {
