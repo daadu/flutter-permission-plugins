@@ -56,9 +56,10 @@ class LocationPermissions {
   ///
   /// Returns [true] if the app settings page could be opened, otherwise [false] is returned.
   Future<bool> openAppSettings() async {
-    final bool hasOpened = await _methodChannel.invokeMethod('openAppSettings');
+    final bool? hasOpened =
+        await _methodChannel.invokeMethod('openAppSettings');
 
-    return hasOpened;
+    return hasOpened ?? false;
   }
 
   /// Request the user for access to the location services.
@@ -84,10 +85,10 @@ class LocationPermissions {
       return false;
     }
 
-    final bool shouldShowRationale = await _methodChannel.invokeMethod(
+    final bool? shouldShowRationale = await _methodChannel.invokeMethod(
         'shouldShowRequestPermissionRationale', permissionLevel.index);
 
-    return shouldShowRationale;
+    return shouldShowRationale ?? false;
   }
 
   /// Allows listening to the enabled/disabled state of the location service, currently only on Android.

@@ -1,3 +1,11 @@
+## 4.0.1
+
+* Added deprecation notice and point to the [permission_handler](https://pub.dev/packages/permission_handler) plugin as replacement.
+
+## 4.0.0
+
+* Migrated to null safety.
+
 ## 3.0.0+1
 
 * Android: fix bug where the plugin didn't differentiate between `locationWhenInUse` and `locationAlways` (see issue [#41](https://github.com/Baseflow/flutter-permission-plugins/issues/41) )
